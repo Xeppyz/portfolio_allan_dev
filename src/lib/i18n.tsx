@@ -17,6 +17,12 @@ export const translations = {
       "2+ years of experience as Programmer Analyst at Grupo Invercasa / Casavisión, specializing in mobile development, web applications, and process automation.",
     downloadCV: "Download CV",
 
+    //Archivements Section
+    achievementsTitle: "Achievements & Diplomas",
+    achievementsDescription: "Some of my professional achievements and diplomas",
+    viewAchievement: "View Achievement",
+
+
     // Skills Section
     skillsTitle: "Skills & Technologies",
     skillsDescription: "Technologies and tools I work with",
@@ -63,6 +69,12 @@ export const translations = {
       "2+ años de experiencia como Analista Programador en Grupo Invercasa / Casavisión, especializado en desarrollo móvil, aplicaciones web y automatización de procesos.",
     downloadCV: "Descargar CV",
 
+    //Archivements Section
+    achievementsTitle: "Logros y Diplomas",
+    achievementsDescription: "Algunos de mis logros profesionales y diplomas",
+    viewAchievement: "Ver Logro",
+    
+
     // Skills Section
     skillsTitle: "Habilidades y Tecnologías",
     skillsDescription: "Tecnologías y herramientas con las que trabajo",
@@ -92,7 +104,7 @@ export const translations = {
     sendMessage: "Enviar Mensaje",
 
     // Footer
-    madeWith: "Hecho con",
+    madeWith: "By xeppyz",
     and: "y",
   },
 } as const

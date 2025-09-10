@@ -107,14 +107,14 @@ export function ContactForm() {
     {
       icon: Mail,
       label: "Email",
-      value: "contact@example.com",
-      href: "mailto:contact@example.com",
+      value: "alexander.xampos10@gmail.com",
+      href: "mailto:alexander.xampos10@gmail.com",
     },
     {
       icon: Phone,
       label: locale === "en" ? "Phone" : "Teléfono",
-      value: "+505 1234 5678",
-      href: "tel:+50512345678",
+      value: "+505 7751 7512",
+      href: "tel:+50577517512",
     },
     {
       icon: MapPin,
@@ -289,7 +289,8 @@ export function ContactForm() {
 
             <Button
               type="submit"
-              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
+              className="w-full bg-primary hover:bg-primary/90"
+              variant="outline"
               disabled={isSubmitting}
             >
               {isSubmitting ? (

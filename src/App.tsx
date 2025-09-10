@@ -1,13 +1,12 @@
 import { useLocale } from "@/hooks/use-locale"
 import { translations } from "@/lib/i18n"
-import { LanguageToggle } from "@/components/language-toggle"
 import { ContactForm } from "@/components/contact-form"
 import { ScrollReveal } from "@/components/scroll-reveal"
 import { FloatingElements } from "@/components/floating-elements"
 import { PageTransition } from "@/components/page-transition"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "./components/ui/badge"
+import { Badge } from "@/components/ui/badge"
 import avatar from "../public/avatar_profile.png"
 import {
   Github,
@@ -30,8 +29,11 @@ import {
   Award,
   BookOpen,
   Languages,
+
 } from "lucide-react"
 import { motion } from "framer-motion"
+import ResponsiveNavbar from "./components/nav-bar"
+import { Achievements, Achievement } from "./components/achievements"
 
 export default function Portfolio() {
   const { locale } = useLocale()
@@ -41,16 +43,16 @@ export default function Portfolio() {
     databases: [{ name: "SQL Server", level: 85, icon: Database }],
     languages: [
       { name: "Flutter/Dart", level: 90, icon: Code },
-      { name: "C# .NET", level: 85, icon: Code },
-      { name: "React/TSX", level: 80, icon: Code },
-      { name: "React Native", level: 75, icon: Code },
-      { name: "Python", level: 70, icon: Code },
-      { name: "JavaScript", level: 80, icon: Code },
+      { name: "C# .NET", level: 80, icon: Code },
+      { name: "React/TSX", level: 60, icon: Code },
+      { name: "React Native", level: 60, icon: Code },
+      { name: "Python", level: 50, icon: Code },
+      { name: "JavaScript", level: 70, icon: Code },
     ],
     extra: [
       { name: "Process Automation", level: 85, icon: Briefcase },
-      { name: "Business Plans", level: 75, icon: Briefcase },
-      { name: "Agile Methodologies", level: 80, icon: Briefcase },
+      { name: "Business Plans", level: 85, icon: Briefcase },
+      { name: "Agile Methodologies", level: 90, icon: Briefcase },
     ],
   }
 
@@ -64,8 +66,8 @@ export default function Portfolio() {
       icon: Smartphone,
       technologies: ["Flutter", "Dart", "SQL Server", "REST API"],
       category: "Mobile",
-      status: "Completed",
-      year: "2023",
+      status: "Ongoing",
+      year: "2024",
     },
     {
       title: locale === "en" ? "Order Management System" : "Sistema de Gestión de Órdenes",
@@ -77,7 +79,7 @@ export default function Portfolio() {
       technologies: ["React", "TypeScript", "C# .NET", "SQL Server"],
       category: "Web",
       status: "Completed",
-      year: "2023",
+      year: "2025",
     },
     {
       title: locale === "en" ? "Fleet Management Dashboard" : "Dashboard de Gestión de Flota",
@@ -89,7 +91,7 @@ export default function Portfolio() {
       technologies: ["React", "Python", "SQL Server", "Power BI"],
       category: "Analytics",
       status: "Completed",
-      year: "2022",
+      year: "2024",
     },
     {
       title: locale === "en" ? "RESTful API Services" : "Servicios API RESTful",
@@ -101,7 +103,7 @@ export default function Portfolio() {
       technologies: ["C# .NET", "SQL Server", "JWT", "Swagger"],
       category: "Backend",
       status: "Ongoing",
-      year: "2023",
+      year: "2024",
     },
     {
       title: locale === "en" ? "React Web Applications" : "Aplicaciones Web React",
@@ -113,7 +115,7 @@ export default function Portfolio() {
       technologies: ["React", "TypeScript", "Tailwind CSS", "Next.js"],
       category: "Web",
       status: "Ongoing",
-      year: "2023",
+      year: "2024",
     },
     {
       title: locale === "en" ? "Process Automation Tools" : "Herramientas de Automatización",
@@ -159,18 +161,40 @@ export default function Portfolio() {
   const certifications = [
     {
       name: "EPD (English Proficiency Diploma)",
-      issuer: locale === "en" ? "Language Institute" : "Instituto de Idiomas",
-      year: "2023",
+      issuer: locale === "en" ? "keiser international language institute" : "keiser international language institute",
+      year: "2025",
       level: locale === "en" ? "Advanced" : "Avanzado",
       icon: Languages,
     },
     {
       name: "Versant English Test",
       issuer: "Pearson",
-      year: "2023",
+      year: "2025",
       level: "B2+ Certified",
       icon: Award,
     },
+  ]
+
+  const achievements: Achievement[] = [
+    {
+      title: "Diploma in Software Engineering",
+      description: "Universidad Casimiro Sotelo",
+      year: "2026 - ongoing",
+      fileUrl: "/assets/diploma-software-engineering.pdf",
+    },
+    {
+      title: "English Proficiency Diploma",
+      description: "Keiser International Language Institute",
+      year: "2025",
+      fileUrl: "/EPD_ENGLISH.pdf", // <-- así accedes al archivo en public
+    },
+    {
+      title: "Excellence academic award",
+      description: "Universidad Centroamericana (UCA)",
+      year: "2022",
+      fileUrl: "/Excelencia.pdf",
+    }
+    // ...más logros
   ]
 
   return (
@@ -179,63 +203,18 @@ export default function Portfolio() {
         <FloatingElements />
 
         {/* Navigation */}
-        <motion.nav
-          className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-sm border-b border-border"
-          initial={{ y: -100 }}
-          animate={{ y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
-          <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-            <motion.div
-              className="font-bold text-xl"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
-            >
-              Portfolio
-            </motion.div>
-            <div className="flex items-center gap-4">
-              <div className="hidden md:flex gap-6">
-                {[
-                  { href: "#about", label: t.about },
-                  { href: "#skills", label: t.skills },
-                  { href: "#projects", label: t.projects },
-                  { href: "#education", label: t.education },
-                  { href: "#contact", label: t.contact },
-                ].map((item, index) => (
-                  <motion.a
-                    key={item.href}
-                    href={item.href}
-                    className="hover:text-primary transition-colors relative"
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 + 0.3 }}
-                    whileHover={{ y: -2 }}
-                  >
-                    {item.label}
-                  </motion.a>
-                ))}
-              </div>
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.8 }}
-              >
-                <LanguageToggle />
-              </motion.div>
-            </div>
-          </div>
-        </motion.nav>
+        <ResponsiveNavbar t={t} />
 
         {/* Hero Section */}
-        <section id="about" className="pt-24 pb-16 px-4 min-h-screen flex items-center">
+        <section id="about" className="pt-24 pb-16 px-4 min-h-screen flex items-center scroll-mt-24">
           <div className="container mx-auto max-w-6xl">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               {/* Left Column - Text Content */}
               <div className="space-y-8">
                 <ScrollReveal direction="up" delay={0.2}>
                   <div className="space-y-4">
                     <motion.div
-                      className="flex items-center gap-2 text-sm text-muted-foreground"
+                      className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground"
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.4 }}
@@ -246,7 +225,7 @@ export default function Portfolio() {
                       <span>22 years old</span>
                     </motion.div>
                     <motion.h1
-                      className="text-4xl md:text-6xl lg:text-7xl font-bold text-balance leading-tight"
+                      className="text-4xl md:text-6xl lg:text-7xl font-bold text-left leading-tight"
                       initial={{ opacity: 0, y: 50 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.6, duration: 0.8 }}
@@ -263,7 +242,7 @@ export default function Portfolio() {
                       </motion.span>
                     </motion.h1>
                     <motion.p
-                      className="text-xl md:text-2xl text-muted-foreground text-pretty leading-relaxed"
+                      className="text-xl md:text-2xl text-muted-foreground text-pretty text-left leading-relaxed break-words"
                       initial={{ opacity: 0, y: 30 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 1.2, duration: 0.8 }}
@@ -308,7 +287,7 @@ export default function Portfolio() {
                 <ScrollReveal direction="up" delay={0.6}>
                   <div className="flex flex-wrap gap-4">
                     <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                      <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
+                      <Button size="lg" variant="outline">
                         <Download className="mr-2 h-5 w-5" />
                         {t.downloadCV}
                       </Button>
@@ -384,7 +363,7 @@ export default function Portfolio() {
                       whileHover={{ scale: 1.02 }}
                       transition={{ type: "spring", stiffness: 300 }}
                     >
-                      <div className="w-80 h-80 md:w-96 md:h-96 rounded-full overflow-hidden border-4 border-primary/30 shadow-2xl">
+                      <div className="w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full overflow-hidden border-4 border-primary/30 shadow-2xl">
                         <img
                           src={avatar}
                           alt="Profile"
@@ -397,11 +376,13 @@ export default function Portfolio() {
 
                       {/* Floating badges */}
                       <motion.div
-                        className="absolute -top-4 -right-4"
+                        className="absolute -top-4 -right-4 "
                         animate={{ y: [0, -10, 0] }}
                         transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
                       >
-                        <Badge className="bg-primary text-primary-foreground shadow-lg">Available for work</Badge>
+                        <Badge className="text-green-600 dark:text-green-500 border-green-500/20 bg-green-500/5">
+                          Available for work
+                        </Badge>
                       </motion.div>
 
                       <motion.div
@@ -409,7 +390,7 @@ export default function Portfolio() {
                         animate={{ y: [0, 10, 0] }}
                         transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut", delay: 1.5 }}
                       >
-                        <Badge variant="secondary" className="shadow-lg">
+                        <Badge variant="secondary" className="shadow-lg whitespace-normal break-words">
                           Programmer Analyst
                         </Badge>
                       </motion.div>
@@ -437,12 +418,14 @@ export default function Portfolio() {
         </section>
 
         {/* Skills Section */}
-        <section id="skills" className="py-20 px-4 bg-card/30">
+        <section id="skills" className="py-20 px-4 bg-card/30 scroll-mt-24">
           <div className="container mx-auto max-w-6xl">
             <ScrollReveal direction="up">
               <div className="text-center mb-16">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">{t.skillsTitle}</h2>
-                <p className="text-muted-foreground text-lg max-w-2xl mx-auto text-pretty">{t.skillsDescription}</p>
+                <p className="text-muted-foreground text-lg max-w-2xl mx-auto text-pretty text-justify leading-relaxed break-words">
+                  {t.skillsDescription}
+                </p>
               </div>
             </ScrollReveal>
 
@@ -475,11 +458,8 @@ export default function Portfolio() {
                                   transition={{ delay: index * 0.1 + i * 0.05 }}
                                 >
                                   <Star
-                                    className={`h-4 w-4 ${
-                                      i < Math.floor(skill.level / 20)
-                                        ? "text-primary fill-primary"
-                                        : "text-muted-foreground"
-                                    }`}
+                                    className={`h-4 w-4 ${i < Math.floor(skill.level / 20) ? "text-primary fill-primary" : "text-muted-foreground"
+                                      }`}
                                   />
                                 </motion.div>
                               ))}
@@ -528,11 +508,8 @@ export default function Portfolio() {
                                   transition={{ delay: index * 0.1 + i * 0.05 }}
                                 >
                                   <Star
-                                    className={`h-3 w-3 ${
-                                      i < Math.floor(skill.level / 20)
-                                        ? "text-primary fill-primary"
-                                        : "text-muted-foreground"
-                                    }`}
+                                    className={`h-3 w-3 ${i < Math.floor(skill.level / 20) ? "text-primary fill-primary" : "text-muted-foreground"
+                                      }`}
                                   />
                                 </motion.div>
                               ))}
@@ -581,11 +558,8 @@ export default function Portfolio() {
                                   transition={{ delay: index * 0.1 + i * 0.05 }}
                                 >
                                   <Star
-                                    className={`h-4 w-4 ${
-                                      i < Math.floor(skill.level / 20)
-                                        ? "text-primary fill-primary"
-                                        : "text-muted-foreground"
-                                    }`}
+                                    className={`h-4 w-4 ${i < Math.floor(skill.level / 20) ? "text-primary fill-primary" : "text-muted-foreground"
+                                      }`}
                                   />
                                 </motion.div>
                               ))}
@@ -642,12 +616,14 @@ export default function Portfolio() {
         </section>
 
         {/* Projects Section */}
-        <section id="projects" className="py-20 px-4">
+        <section id="projects" className="py-20 px-4 scroll-mt-24">
           <div className="container mx-auto max-w-7xl">
             <ScrollReveal direction="up">
               <div className="text-center mb-16">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">{t.projectsTitle}</h2>
-                <p className="text-muted-foreground text-lg max-w-2xl mx-auto text-pretty">{t.projectsDescription}</p>
+                <p className="text-muted-foreground text-lg max-w-2xl mx-auto text-pretty text-justify leading-relaxed break-words">
+                  {t.projectsDescription}
+                </p>
               </div>
             </ScrollReveal>
 
@@ -665,7 +641,7 @@ export default function Portfolio() {
                   >
                     <Badge
                       variant="secondary"
-                      className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors"
+                      className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors whitespace-normal break-words"
                     >
                       {category}
                     </Badge>
@@ -695,7 +671,7 @@ export default function Portfolio() {
                               <div className="flex items-center gap-2">
                                 <Badge
                                   variant={project.status === "Completed" ? "default" : "secondary"}
-                                  className="text-xs"
+                                  className="text-xs whitespace-normal break-words"
                                 >
                                   {project.status}
                                 </Badge>
@@ -707,7 +683,7 @@ export default function Portfolio() {
                               {project.title}
                             </h3>
 
-                            <p className="text-sm text-muted-foreground leading-relaxed text-pretty mb-4">
+                            <p className="text-sm text-muted-foreground leading-relaxed text-pretty text-justify mb-4 break-words">
                               {project.description}
                             </p>
 
@@ -721,7 +697,7 @@ export default function Portfolio() {
                                   transition={{ delay: techIndex * 0.05 }}
                                   whileHover={{ scale: 1.05 }}
                                 >
-                                  <Badge variant="outline" className="text-xs bg-background/50">
+                                  <Badge variant="outline" className="text-xs bg-background/50 whitespace-normal break-words">
                                     {tech}
                                   </Badge>
                                 </motion.div>
@@ -780,12 +756,12 @@ export default function Portfolio() {
         </section>
 
         {/* Education Section */}
-        <section id="education" className="py-20 px-4 bg-card/30">
+        <section id="education" className="py-20 px-4 bg-card/30 scroll-mt-24">
           <div className="container mx-auto max-w-6xl">
             <ScrollReveal direction="up">
               <div className="text-center mb-16">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">{t.educationTitle}</h2>
-                <p className="text-muted-foreground text-lg max-w-2xl mx-auto text-pretty">
+                <p className="text-muted-foreground text-lg max-w-2xl mx-auto text-pretty text-justify leading-relaxed break-words">
                   {locale === "en"
                     ? "Academic background and professional certifications that shaped my software engineering journey"
                     : "Formación académica y certificaciones profesionales que moldearon mi trayectoria en ingeniería de software"}
@@ -850,7 +826,9 @@ export default function Portfolio() {
 
                                   <p className="text-lg font-semibold text-primary mb-1">{edu.degree}</p>
                                   <p className="text-sm text-muted-foreground mb-3">{edu.duration}</p>
-                                  <p className="text-muted-foreground text-pretty">{edu.description}</p>
+                                  <p className="text-muted-foreground text-pretty text-justify leading-relaxed break-words">
+                                    {edu.description}
+                                  </p>
                                 </div>
                               </div>
                             </CardContent>
@@ -895,7 +873,7 @@ export default function Portfolio() {
                                 </div>
 
                                 <p className="text-sm text-muted-foreground mb-1">{cert.issuer}</p>
-                                <Badge variant="secondary" className="text-xs">
+                                <Badge variant="secondary" className="text-xs whitespace-normal break-words">
                                   {cert.level}
                                 </Badge>
                               </div>
@@ -943,14 +921,33 @@ export default function Portfolio() {
             </ScrollReveal>
           </div>
         </section>
+         {/* Achievements Section */}
+        <section id="achievements" className="py-20 px-4 scroll-mt-24">
+          <div className="container mx-auto max-w-6xl">
+            <ScrollReveal direction="up">
+              <div className="text-center mb-16">
+                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">{t.achievementsTitle}</h2>
+                <p className="text-muted-foreground text-lg max-w-2xl mx-auto text-pretty text-justify leading-relaxed break-words">
+                  {t.achievementsDescription}
+                </p>
+              </div>
+            </ScrollReveal>
+
+            <ScrollReveal direction="up" delay={0.2}>
+              <Achievements items={achievements} />
+            </ScrollReveal>
+          </div>
+        </section>
 
         {/* Contact Section */}
-        <section id="contact" className="py-20 px-4">
+        <section id="contact" className="py-20 px-4 scroll-mt-24">
           <div className="container mx-auto max-w-6xl">
             <ScrollReveal direction="up">
               <div className="text-center mb-16">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">{t.contactTitle}</h2>
-                <p className="text-muted-foreground text-lg max-w-2xl mx-auto text-pretty">{t.contactDescription}</p>
+                <p className="text-muted-foreground text-lg max-w-2xl mx-auto text-pretty text-justify leading-relaxed break-words">
+                  {t.contactDescription}
+                </p>
               </div>
             </ScrollReveal>
 
@@ -959,6 +956,8 @@ export default function Portfolio() {
             </ScrollReveal>
           </div>
         </section>
+
+       
 
         {/* Footer */}
         <motion.footer
@@ -969,7 +968,7 @@ export default function Portfolio() {
         >
           <div className="container mx-auto text-center">
             <motion.p className="text-muted-foreground" whileHover={{ scale: 1.05 }}>
-              {t.madeWith} ❤️ {t.and} Next.js
+              {t.madeWith} ❤️ React + TypeScript + Tailwind CSS
             </motion.p>
           </div>
         </motion.footer>
