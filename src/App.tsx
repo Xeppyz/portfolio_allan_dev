@@ -7,7 +7,7 @@ import { PageTransition } from "@/components/page-transition"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import avatar from "../public/avatar_profile.png"
+import avatar from "../public/avatar.png"
 import {
   Github,
   Linkedin,
@@ -921,7 +921,7 @@ export default function Portfolio() {
             </ScrollReveal>
           </div>
         </section>
-         {/* Achievements Section */}
+        {/* Achievements Section */}
         <section id="achievements" className="py-20 px-4 scroll-mt-24">
           <div className="container mx-auto max-w-6xl">
             <ScrollReveal direction="up">
@@ -957,7 +957,7 @@ export default function Portfolio() {
           </div>
         </section>
 
-       
+
 
         {/* Footer */}
         <motion.footer
