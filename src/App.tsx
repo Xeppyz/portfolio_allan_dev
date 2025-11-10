@@ -7,7 +7,7 @@ import { PageTransition } from "@/components/page-transition"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import avatar from "../public/avatar.png"
+import avatar from "../public/profile.jpg"
 import {
   Github,
   Linkedin,
